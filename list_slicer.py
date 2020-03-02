@@ -1,15 +1,24 @@
 # -*- coding: utf-8 -*-
 
-input_list = [2, 11, 4, 1, 5, 2, 2, 10, 3, 3, 3, 2, 5, 7, 3, 1, 4, 1, 2, 3]
+"""
+    Алгоритм нарезки алфавитного списка на примерно равные части.
+    INPUT_LIST: список количества элементов в одной секции
+"""
+
+INPUT_LIST = [2, 11, 4, 1, 5, 2, 2, 10, 3, 3, 3, 2, 5, 7, 3, 1, 4, 1, 2, 3]
 
 COL = 6  # Целевое количество колонок
-peak_ = max(input_list)/2  # Половина максимального значения в одной "букве"
+PEAK_ = max(INPUT_LIST) / 2  # Половина максимального значения в одной "букве"
 
 
 class MenuSplit:
+    """
+    Создание оптимально нарезанного списка
+    """
+
     def __init__(self, _input_list):
-        average_ = sum(input_list)/COL  # Среднее значение кол-ва элементов в одном столбце
-        self.middle = peak_ if peak_ > average_ else average_
+        average_ = sum(INPUT_LIST) / COL  # Среднее значение кол-ва элементов в одном столбце
+        self.middle = PEAK_ if PEAK_ > average_ else average_
         self.out_list = []
         self._input_list = _input_list
         self._next = None
@@ -43,12 +52,12 @@ class MenuSplit:
 
         def left_larger(current, next_):
             return self._local_sum + current + next_ < self.middle or \
-                   (abs(self.middle - (self._local_sum + current)) >= abs(self.middle -
-                                                                          (self._local_sum + current + next_)))
+                   (abs(self.middle - (self._local_sum + current)) >=
+                    abs(self.middle - (self._local_sum + current + next_)))
 
         def left_under(current, next_):
-            return abs(self.middle - (self._local_sum + current)) < abs(self.middle -
-                                                                        (self._local_sum + current + next_))
+            return abs(self.middle - (self._local_sum + current)) < \
+                   abs(self.middle - (self._local_sum + current + next_))
 
         def is_last_row():
             return len(self._input_list) == 1 and len(self.out_list) == COL-1
@@ -74,7 +83,7 @@ class MenuSplit:
 
 if __name__ == "__main__":
     for correction in [0, ]:  # Пробуем разные поправки к кол-ву элементов в одном столбце
-        menu_list = MenuSplit(input_list)
+        menu_list = MenuSplit(INPUT_LIST)
         print(u"Среднее значение: {}\n"
               u"Поправка: {}\n"
               u"Суммарное отклонение: {}\n"
