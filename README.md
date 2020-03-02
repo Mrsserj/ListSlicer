@@ -1,4 +1,4 @@
 # ListSlicer
 
 Code example.
-Splitting a list into equal weight columns.
+Splitting an alphabetical list into equal weight columns.
